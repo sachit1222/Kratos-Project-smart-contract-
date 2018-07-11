@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "29571924412",
+    "firebase_url": "https://sachit-aa.firebaseio.com",
+    "project_id": "sachit-aa",
+    "storage_bucket": "sachit-aa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29571924412:android:f705bbbb70b6f80d",
+        "android_client_info": {
+          "package_name": "com.example.sachit.sachitsauctionapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "29571924412-7qklvdiqddl3rmcumb4tauetvcvhj9kt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgI-tA_Gv8txDBb1YALEluqnDPSTp6-xU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
