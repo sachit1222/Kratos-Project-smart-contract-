@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class ApplicationInterface extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
+    private Button search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,7 @@ public class ApplicationInterface extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
         final Button logout = (Button) findViewById(R.id.btnLogout);
+        search = (Button) findViewById(R.id.btnSearch);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,6 +38,13 @@ public class ApplicationInterface extends AppCompatActivity {
             }
         });
 
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent registerIntent = new Intent(ApplicationInterface.this, SearchActivity.class);
+                ApplicationInterface.this.startActivity(registerIntent);
+            }
+        });
 
 
 

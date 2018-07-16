@@ -25,9 +25,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-       // System.out.println("Hi");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register2);
+        setContentView(R.layout.activity_register);
 
         firebaseAuth = FirebaseAuth.getInstance();
         setUIViews();
@@ -47,8 +46,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if (validate()) {
 
-                    final String user_email = etEmail.getText().toString().trim();
-                    final String user_password = etPassword.getText().toString().trim();
+                    String user_email = etEmail.getText().toString().trim();
+                    String user_password = etPassword.getText().toString().trim();
 
                     firebaseAuth.createUserWithEmailAndPassword (user_email, user_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 

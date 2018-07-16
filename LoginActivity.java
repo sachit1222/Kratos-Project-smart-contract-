@@ -19,16 +19,20 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
+    private EditText email, password;
+    private Button userLogin;
+    private TextView registerLink;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        final EditText email = (EditText) findViewById(R.id.etEmail);
-        final EditText password = (EditText) findViewById(R.id.etPassword);
-        final TextView registerLink = (TextView) findViewById(R.id.tvRegisterHere);
-        final Button login = (Button) findViewById(R.id.btnLogin);
+        email = (EditText) findViewById(R.id.etEmail);
+        password = (EditText) findViewById(R.id.etPassword);
+        registerLink = (TextView) findViewById(R.id.tvRegisterHere);
+        userLogin = (Button) findViewById(R.id.btnLogin);
 
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -49,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         // registerLink.setText("No. of attempts remaining: 5");
-        login.setOnClickListener(new View.OnClickListener() {
+        userLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 validate(email.getText().toString(), password.getText().toString());
