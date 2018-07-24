@@ -40,7 +40,11 @@ public class LoginActivity extends AppCompatActivity {
         if (user != null) {
 
             finish();
-            startActivity(new Intent(LoginActivity.this, ApplicationInterface.class));
+            Bundle bundle = new Bundle();
+            bundle.putString("email", user.getEmail());
+            Intent intent = new Intent(LoginActivity.this, ApplicationInterface.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
         }
 
 
@@ -52,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        // registerLink.setText("No. of attempts remaining: 5");
         userLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    private void validate(String email, String password) {
+    private void validate(final String email, String password) {
 
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 
@@ -71,8 +74,16 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (task.isSuccessful()) {
 
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("email", email);
+                    Intent intent = new Intent(LoginActivity.this, ApplicationInterface.class);
+
+                    intent.putExtras(bundle);
                     Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(LoginActivity.this, ApplicationInterface.class));
+                    startActivity(intent);
+
+
                 } else {
 
                     Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();

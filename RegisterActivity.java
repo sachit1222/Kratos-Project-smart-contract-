@@ -23,6 +23,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText etPassword, etEmail;
     private Button register;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

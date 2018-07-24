@@ -29,7 +29,9 @@ public class SearchActivity extends AppCompatActivity {
     //   String[] items;
     ArrayList<String> items;
     ListView listView;
-    //  EditText editText;
+    EditText editText;
+    private ArrayList<String> filterData;
+    private ArrayAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,7 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         listView = (ListView) findViewById(R.id.listView);
-        // editText = (EditText)findViewById(R.id.txtsearch);
+        editText = (EditText)findViewById(R.id.type_search);
 
 
         items = new ArrayList<>();
@@ -51,8 +53,10 @@ public class SearchActivity extends AppCompatActivity {
         items.add("Frisbee");
         items.add("Golf Ball");
 
+        filterData = new ArrayList<>();
+        filterData.addAll(items);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, filterData);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -64,6 +68,47 @@ public class SearchActivity extends AppCompatActivity {
         });
 
 
+        editText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+
+                search(s.toString());
+
+
+            }
+        });
+    }
+
+    private void search(String s) {
+
+        if(s.trim().length() == 0){
+            filterData.clear();
+            filterData.addAll(items);
+            adapter.notifyDataSetChanged();
+        }
+        else{
+            filterData.clear();
+            for(String value: items){
+                if(value.toLowerCase().contains(s.trim().toLowerCase())){
+                    filterData.add(value);
+                }
+
+            }
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -72,36 +117,7 @@ public class SearchActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
 
-
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) searchItem.getActionView();
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                ArrayList<String> templist = new ArrayList<>();
-
-                for (String temp : items) {
-
-                    if (temp.toLowerCase().contains(s.toLowerCase())) {
-                        templist.add(temp);
-                    }
-                }
-                ArrayAdapter<String>   adapter = new ArrayAdapter<>(SearchActivity.this, android.R.layout.simple_list_item_1, templist);
-                listView.setAdapter(adapter);
-
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
-        });
-
-
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
 }
